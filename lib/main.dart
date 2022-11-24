@@ -1,6 +1,10 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:hey_chat/colors.dart';
+import 'package:hey_chat/common/widgets/error.dart';
+import 'package:hey_chat/common/widgets/loader.dart';
+import 'package:hey_chat/features/auth/controller/auth_controller.dart';
 import 'package:hey_chat/features/landing/screens/landing_screen.dart';
 import 'package:hey_chat/firebase_options.dart';
 import 'package:hey_chat/router.dart';
@@ -13,14 +17,14 @@ void main() async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
-  runApp(const MyApp());
+  runApp(const ProviderScope(child: MyApp()));
 }
 
-class MyApp extends StatelessWidget {
+class MyApp extends ConsumerWidget {
   const MyApp({Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return MaterialApp(
       debugShowCheckedModeBanner: true,
       title: 'Hey Chat',
@@ -30,11 +34,20 @@ class MyApp extends StatelessWidget {
             color: appBarColor,
           )),
       onGenerateRoute: (settings) => generateRoute(settings),
-      // home: const ResponsiveLayout(
-      //   mobileScreenLayout: MobileLayoutScreen(),
-      //   webScreenLayout: WebLayoutScreen(),
-      // ),
-      home: const LandingScreen(),
+      home: ref.watch(userDataAuthProvider).when(
+            data: (user) {
+              if (user == null) {
+                return const LandingScreen();
+              }
+              return const MobileLayoutScreen();
+            },
+            error: (error, stackTrace) {
+              return ErrorScreen(
+                error: error.toString(),
+              );
+            },
+            loading: () => const Loader(),
+          ),
     );
   }
 }

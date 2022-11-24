@@ -14,6 +14,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "129649540254-svgn7q37lk6agjbpu3rm5ukrcdeufklb.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.hey_chat",
+            "certificate_hash": "98e28562bd97c8e2c3561ff34b3cb8c272a8a11c"
+          }
+        },
+        {
           "client_id": "129649540254-mj8lmsd70ms5gs22kduvplvsme95d152.apps.googleusercontent.com",
           "client_type": 3
         }
@@ -29,6 +37,13 @@
             {
               "client_id": "129649540254-mj8lmsd70ms5gs22kduvplvsme95d152.apps.googleusercontent.com",
               "client_type": 3
+            },
+            {
+              "client_id": "129649540254-ciaaicca0r7ul6v0jsrbpipaobtdd5u9.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.heyChat"
+              }
             }
           ]
         }

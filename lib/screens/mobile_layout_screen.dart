@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hey_chat/colors.dart';
+import 'package:hey_chat/features/select_contacts/screens/select_contacts_screen.dart';
 import 'package:hey_chat/widgets/contacts_list.dart';
 
 
@@ -47,7 +48,7 @@ class MobileLayoutScreen extends StatelessWidget {
                 icon: Icon(Icons.messenger,size: 18,),
               ),
               Tab(
-                text: 'STATUS',
+                text: 'STORIES',
                 icon: Icon(Icons.blur_circular_rounded,size: 18,),
               ),
               Tab(
@@ -59,7 +60,9 @@ class MobileLayoutScreen extends StatelessWidget {
         ),
         body: const ContactsList(),
         floatingActionButton: FloatingActionButton(
-          onPressed: () {},
+          onPressed: () {
+            Navigator.pushNamed(context, SelectContactScreen.routeName);
+          },
           backgroundColor: tabColor,
           child: const Icon(
             Icons.chat_bubble,
