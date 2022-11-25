@@ -1,0 +1,44 @@
+import 'package:flutter/material.dart';
+import 'package:hey_chat/common/widgets/error.dart';
+import 'package:hey_chat/features/auth/view/login_screen.dart';
+import 'package:hey_chat/features/auth/view/otp_screen.dart';
+import 'package:hey_chat/features/auth/view/user_information_screen.dart';
+import 'package:hey_chat/features/select_contacts/view/select_contacts_screen.dart';
+
+Route<dynamic> generateRoute(RouteSettings settings) {
+  switch (settings.name) {
+
+    //login screen route
+    case LoginScreen.routeName:
+      return MaterialPageRoute(
+        builder: (context) => const LoginScreen(),
+      );
+
+      //OTP screen route
+    case OTPScreen.routeName:
+      final verificationId = settings.arguments as String;
+      return MaterialPageRoute(
+        builder: (context) => OTPScreen(verificationId: verificationId),
+      );
+
+      //UserInfoScreen route
+    case UserInformationScreen.routeName:
+      return MaterialPageRoute(
+        builder: (context) => const UserInformationScreen(),
+      );
+
+      //Selectcontact screen route
+    case SelectContactScreen.routeName:
+      return MaterialPageRoute(
+        builder: (context) => const SelectContactScreen(),
+      );
+
+      //error screen route
+    default:
+      return MaterialPageRoute(
+        builder: (context) => const Scaffold(
+          body: ErrorScreen(error: "This page doesn't exist"),
+        ),
+      );
+  }
+}
