@@ -27,16 +27,13 @@ class LandingScreen extends StatelessWidget {
                 fontWeight: FontWeight.w600,
               ),
             ),
-            commonSizedBox(size.height / 13),
-            ClipRRect(
-              borderRadius: BorderRadius.circular(280.0),
-              child: Image.asset(
-                'assets/landingscreen.png',
-                height: 350,
-                width: 350,
-                fit: BoxFit.cover,
-                color: tabColor,
-              ),
+            commonSizedBox(size.height / 14),
+            Image.asset(
+              'assets/landingImage.png',
+              height: 350,
+              width: 350,
+              fit: BoxFit.cover,
+              //color: tabColor,
             ),
             commonSizedBox(size.height / 13),
             const Padding(
