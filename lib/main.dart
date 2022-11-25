@@ -9,8 +9,6 @@ import 'package:hey_chat/features/landing/screens/landing_screen.dart';
 import 'package:hey_chat/firebase_options.dart';
 import 'package:hey_chat/router.dart';
 import 'package:hey_chat/screens/mobile_layout_screen.dart';
-import 'package:hey_chat/screens/web_layout_screen.dart';
-import 'package:hey_chat/utils/responsive_layout.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
