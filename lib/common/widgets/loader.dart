@@ -1,6 +1,6 @@
 
 import 'package:flutter/material.dart';
-import 'package:hey_chat/colors.dart';
+import 'package:hey_chat/utils/colors.dart';
 
 class Loader extends StatelessWidget {
   const Loader({super.key});

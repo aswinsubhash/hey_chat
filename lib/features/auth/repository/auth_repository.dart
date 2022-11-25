@@ -5,10 +5,10 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:hey_chat/common/repositories/common_firebase_storage_repository.dart';
-import 'package:hey_chat/features/auth/screens/otp_screen.dart';
-import 'package:hey_chat/features/auth/screens/user_information_screen.dart';
+import 'package:hey_chat/features/auth/view/otp_screen.dart';
+import 'package:hey_chat/features/auth/view/user_information_screen.dart';
 import 'package:hey_chat/models/user_model.dart';
-import 'package:hey_chat/screens/mobile_layout_screen.dart';
+import 'package:hey_chat/features/home/view/mobile_layout_screen.dart';
 import 'package:hey_chat/utils/utils.dart';
 
 final authRepositoryProvider = Provider(
