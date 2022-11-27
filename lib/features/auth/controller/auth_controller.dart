@@ -56,4 +56,9 @@ class AuthController {
       context: context,
     );
   }
+
+  //getting unique user id 
+  Stream<UserModel> userDataById(String userId){
+    return authRepository.userData(userId);
+  }
 }

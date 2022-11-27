@@ -1,19 +1,54 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
-import 'package:hey_chat/utils/colors.dart';
-import 'package:hey_chat/utils/info.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:hey_chat/common/widgets/loader.dart';
+import 'package:hey_chat/features/auth/controller/auth_controller.dart';
+import 'package:hey_chat/features/chat/widgets/bottom_chart_field.dart';
 import 'package:hey_chat/features/chat/widgets/chat_list.dart';
+import 'package:hey_chat/models/user_model.dart';
+import 'package:hey_chat/utils/colors.dart';
 
-class MobileChatScreen extends StatelessWidget {
-  const MobileChatScreen({Key? key}) : super(key: key);
+class MobileChatScreen extends ConsumerWidget {
+  static const String routeName = '/mobile-chat-screen';
+  final String name;
+  final String uid;
+
+  const MobileChatScreen({
+    Key? key,
+    required this.name,
+    required this.uid,
+  }) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: appBarColor,
-        title: Text(
-          info[0]['name'].toString(),
-        ),
+        title: StreamBuilder<UserModel>(
+            stream: ref.read(authControllerProvider).userDataById(uid),
+            builder: (context, snaphot) {
+              if (snaphot.connectionState == ConnectionState.done) {
+                return const Loader();
+              }
+              return Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    name,
+                    style: const TextStyle(
+                      fontSize: 18,
+                    ),
+                  ),
+                  Text(
+                    snaphot.data!.isOnline ? 'online' : 'offline',
+                    style: const TextStyle(
+                      fontSize: 13,
+                      fontWeight: FontWeight.normal,
+                    ),
+                  ),
+                ],
+              );
+            }),
         centerTitle: false,
         actions: [
           IconButton(
@@ -35,53 +70,11 @@ class MobileChatScreen extends StatelessWidget {
           const Expanded(
             child: ChatList(),
           ),
-          TextField(
-            keyboardType: TextInputType.text,
-            decoration: InputDecoration(
-              // filled: true,
-              // fillColor: mobileChatBoxColor,
-              prefixIcon: const Padding(
-                padding: EdgeInsets.symmetric(horizontal: 20.0),
-                child: Icon(
-                  Icons.emoji_emotions,
-                  color: Colors.grey,
-                ),
-              ),
-              suffixIcon: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 20.0),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  children: [
-                    IconButton(
-                      onPressed: () {},
-                      icon: const Icon(
-                        Icons.camera_alt,
-                        color: Colors.grey,
-                      ),
-                    ),
-                    IconButton(
-                      onPressed: () {},
-                      icon: const Icon(
-                        Icons.attach_file,
-                        color: Colors.grey,
-                      ),
-                    )
-                  ],
-                ),
-              ),
-              hintText: 'Type a message!',
-              border: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(20.0),
-                borderSide: const BorderSide(
-                  width: 0,
-                  style: BorderStyle.none,
-                ),
-              ),
-              contentPadding: const EdgeInsets.all(10),
-            ),
-          ),
+          BottomChatField(),
         ],
       ),
     );
   }
 }
+
+

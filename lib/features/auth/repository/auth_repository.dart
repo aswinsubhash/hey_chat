@@ -1,5 +1,4 @@
 import 'dart:io';
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -27,16 +26,18 @@ class AuthRepository {
     required this.firestore,
   });
 
-Future<UserModel?>getCurrentUserData() async{
-  var userData = await firestore.collection('users').doc(auth.currentUser?.uid).get();
+  Future<UserModel?> getCurrentUserData() async {
+    var userData =
+        await firestore.collection('users').doc(auth.currentUser?.uid).get();
 
-  UserModel? user;
-  if(userData.data()!= null){
-   user = UserModel.fromMap(userData.data()!) ;
+    UserModel? user;
+    if (userData.data() != null) {
+      user = UserModel.fromMap(userData.data()!);
+    }
+    return user;
   }
-  return user;
-}
 
+  //signing with phone number
   void signInWithPhone(BuildContext context, String phoneNumber) async {
     try {
       await auth.verifyPhoneNumber(
@@ -58,6 +59,7 @@ Future<UserModel?>getCurrentUserData() async{
     }
   }
 
+  //verifying otp
   void verifyOTP(
       {required BuildContext context,
       required String verificationId,
@@ -80,6 +82,7 @@ Future<UserModel?>getCurrentUserData() async{
     }
   }
 
+  //store data in firebase
   void saveUserDataToFirebase({
     required String name,
     required File? profilePic,
@@ -106,7 +109,7 @@ Future<UserModel?>getCurrentUserData() async{
         uid: uid,
         profilePic: photoUrl,
         isOnline: true,
-        phoneNumber: auth.currentUser!.uid,
+        phoneNumber: auth.currentUser!.phoneNumber!,
         groupId: [],
       );
 
@@ -119,5 +122,14 @@ Future<UserModel?>getCurrentUserData() async{
     } catch (e) {
       showSnackBar(context: context, content: e.toString());
     }
+  }
+
+//getting unique user id
+  Stream<UserModel> userData(String userId) {
+    return firestore.collection('users').doc(userId).snapshots().map(
+          (event) => UserModel.fromMap(
+            event.data()!,
+          ),
+        );
   }
 }

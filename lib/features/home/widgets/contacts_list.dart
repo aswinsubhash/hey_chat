@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:hey_chat/utils/colors.dart';
 import 'package:hey_chat/utils/info.dart';
@@ -21,7 +20,10 @@ class ContactsList extends StatelessWidget {
                 onTap: () {
                   Navigator.of(context).push(
                     MaterialPageRoute(
-                      builder: (context) => const MobileChatScreen(),
+                      builder: (context) => const MobileChatScreen(
+                        name: 'Aswin',
+                        uid: '1234',
+                      ),
                     ),
                   );
                 },

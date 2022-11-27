@@ -3,6 +3,7 @@ import 'package:hey_chat/common/widgets/error.dart';
 import 'package:hey_chat/features/auth/view/login_screen.dart';
 import 'package:hey_chat/features/auth/view/otp_screen.dart';
 import 'package:hey_chat/features/auth/view/user_information_screen.dart';
+import 'package:hey_chat/features/chat/view/mobile_chat_screen.dart';
 import 'package:hey_chat/features/select_contacts/view/select_contacts_screen.dart';
 
 Route<dynamic> generateRoute(RouteSettings settings) {
@@ -14,26 +15,38 @@ Route<dynamic> generateRoute(RouteSettings settings) {
         builder: (context) => const LoginScreen(),
       );
 
-      //OTP screen route
+    //OTP screen route
     case OTPScreen.routeName:
       final verificationId = settings.arguments as String;
       return MaterialPageRoute(
         builder: (context) => OTPScreen(verificationId: verificationId),
       );
 
-      //UserInfoScreen route
+    //UserInfoScreen route
     case UserInformationScreen.routeName:
       return MaterialPageRoute(
         builder: (context) => const UserInformationScreen(),
       );
 
-      //Selectcontact screen route
+    //Selectcontact screen route
     case SelectContactScreen.routeName:
       return MaterialPageRoute(
         builder: (context) => const SelectContactScreen(),
       );
 
-      //error screen route
+    //Mobilechat screen route
+    case MobileChatScreen.routeName:
+      final arguments = settings.arguments as Map<String, dynamic>;
+      final name = arguments['name'];
+      final uid = arguments['uid'];
+      return MaterialPageRoute(
+        builder: (context) =>  MobileChatScreen(
+          name: name,
+          uid: uid,
+        ),
+      );
+
+    //error screen route
     default:
       return MaterialPageRoute(
         builder: (context) => const Scaffold(
