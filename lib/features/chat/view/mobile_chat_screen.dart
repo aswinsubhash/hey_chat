@@ -26,8 +26,8 @@ class MobileChatScreen extends ConsumerWidget {
         backgroundColor: appBarColor,
         title: StreamBuilder<UserModel>(
             stream: ref.read(authControllerProvider).userDataById(uid),
-            builder: (context, snaphot) {
-              if (snaphot.connectionState == ConnectionState.done) {
+            builder: (context, snapshot) {
+              if (snapshot.connectionState == ConnectionState.done) {
                 return const Loader();
               }
               return Column(
@@ -40,7 +40,7 @@ class MobileChatScreen extends ConsumerWidget {
                     ),
                   ),
                   Text(
-                    snaphot.data!.isOnline ? 'online' : 'offline',
+                    snapshot.data!.isOnline ? 'online' : 'offline',
                     style: const TextStyle(
                       fontSize: 13,
                       fontWeight: FontWeight.normal,
@@ -49,6 +49,9 @@ class MobileChatScreen extends ConsumerWidget {
                 ],
               );
             }),
+
+            //5:13:15 timestamp
+            
         centerTitle: false,
         actions: [
           IconButton(
@@ -67,8 +70,10 @@ class MobileChatScreen extends ConsumerWidget {
       ),
       body: Column(
         children: [
-          const Expanded(
-            child: ChatList(),
+           Expanded(
+            child: ChatList(
+              receiverUserId: uid,
+            ),
           ),
           BottomChatField(
             receiverUserId: uid,

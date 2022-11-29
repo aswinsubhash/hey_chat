@@ -1,11 +1,45 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:hey_chat/features/auth/controller/auth_controller.dart';
 import 'package:hey_chat/utils/colors.dart';
 import 'package:hey_chat/features/select_contacts/view/select_contacts_screen.dart';
-import 'package:hey_chat/features/home/widgets/contacts_list.dart';
+import 'package:hey_chat/features/chat/widgets/contacts_list.dart';
 
-
-class MobileLayoutScreen extends StatelessWidget {
+class MobileLayoutScreen extends ConsumerStatefulWidget {
   const MobileLayoutScreen({Key? key}) : super(key: key);
+
+  @override
+  ConsumerState<MobileLayoutScreen> createState() => _MobileLayoutScreenState();
+}
+
+class _MobileLayoutScreenState extends ConsumerState<MobileLayoutScreen>
+    with WidgetsBindingObserver {
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addObserver(this);
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    WidgetsBinding.instance.removeObserver(this);
+  }
+
+  @override
+  void didChangeAppLifecycleState(AppLifecycleState state) {
+    super.didChangeAppLifecycleState(state);
+    switch (state) {
+      case AppLifecycleState.resumed:
+        ref.read(authControllerProvider).setUserState(true);
+        break;
+      case AppLifecycleState.inactive:
+      case AppLifecycleState.detached:
+      case AppLifecycleState.paused:
+        ref.read(authControllerProvider).setUserState(false);
+        break;
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -45,15 +79,24 @@ class MobileLayoutScreen extends StatelessWidget {
             tabs: [
               Tab(
                 text: 'CHATS',
-                icon: Icon(Icons.messenger,size: 18,),
+                icon: Icon(
+                  Icons.messenger,
+                  size: 18,
+                ),
               ),
               Tab(
                 text: 'STORIES',
-                icon: Icon(Icons.blur_circular_rounded,size: 18,),
+                icon: Icon(
+                  Icons.blur_circular_rounded,
+                  size: 18,
+                ),
               ),
               Tab(
                 text: 'CALLS',
-                icon: Icon(Icons.call_rounded,size: 18,),
+                icon: Icon(
+                  Icons.call_rounded,
+                  size: 18,
+                ),
               ),
             ],
           ),
