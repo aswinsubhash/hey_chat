@@ -1,9 +1,12 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:hey_chat/common/widgets/error.dart';
 import 'package:hey_chat/features/auth/view/login_screen.dart';
 import 'package:hey_chat/features/auth/view/otp_screen.dart';
 import 'package:hey_chat/features/auth/view/user_information_screen.dart';
 import 'package:hey_chat/features/chat/view/mobile_chat_screen.dart';
+import 'package:hey_chat/features/home/view/confirm_status_screen.dart';
 import 'package:hey_chat/features/select_contacts/view/select_contacts_screen.dart';
 
 Route<dynamic> generateRoute(RouteSettings settings) {
@@ -40,9 +43,18 @@ Route<dynamic> generateRoute(RouteSettings settings) {
       final name = arguments['name'];
       final uid = arguments['uid'];
       return MaterialPageRoute(
-        builder: (context) =>  MobileChatScreen(
+        builder: (context) => MobileChatScreen(
           name: name,
           uid: uid,
+        ),
+      );
+
+    // confirm status route
+    case ConfirmStatusScreen.routeName:
+      final file = settings.arguments as File;
+      return MaterialPageRoute(
+        builder: (context) => ConfirmStatusScreen(
+          file: file,
         ),
       );
 
