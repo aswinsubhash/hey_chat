@@ -63,6 +63,7 @@ class MyMessageCard extends StatelessWidget {
                           bottom: 25, // 5:36:23 timestamp
                         ),
                   child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       if (isReplying) ...[
                         Text(
@@ -75,7 +76,7 @@ class MyMessageCard extends StatelessWidget {
                         Container(
                           padding: const EdgeInsets.all(10),
                           decoration: BoxDecoration(
-                            color: backgroundColor.withOpacity(0.5),
+                            color: backgroundColor.withOpacity(0.2),
                             borderRadius: const BorderRadius.all(
                               Radius.circular(
                                 5,

@@ -73,7 +73,7 @@ class SenderMessageCard extends StatelessWidget {
                         Container(
                           padding: const EdgeInsets.all(10),
                           decoration: BoxDecoration(
-                            color: backgroundColor.withOpacity(0.5),
+                            color: backgroundColor.withOpacity(0.3),
                             borderRadius: const BorderRadius.all(
                               Radius.circular(
                                 5,
