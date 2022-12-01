@@ -1,4 +1,3 @@
-// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
@@ -11,7 +10,7 @@ import 'package:hey_chat/models/message.dart';
 import 'package:intl/intl.dart';
 
 class ChatList extends ConsumerStatefulWidget {
-   final String receiverUserId;
+  final String receiverUserId;
   const ChatList({
     Key? key,
     required this.receiverUserId,
@@ -32,20 +31,23 @@ class _ChatListState extends ConsumerState<ChatList> {
 
   @override
   Widget build(BuildContext context) {
-     return StreamBuilder<List<Message>>(
-        stream: ref.read(chatControllerProvider).chatStream(widget.receiverUserId),
+    return StreamBuilder<List<Message>>(
+        stream:
+            ref.read(chatControllerProvider).chatStream(widget.receiverUserId),
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
             return const Loader();
           }
 
-          SchedulerBinding.instance.addPostFrameCallback((_) { 
-            messageController.jumpTo(messageController.position.maxScrollExtent);
+          SchedulerBinding.instance.addPostFrameCallback((_) {
+            messageController
+                .jumpTo(messageController.position.maxScrollExtent);
           });
           return ListView.builder(
             controller: messageController,
             itemCount: snapshot.data!.length,
             itemBuilder: (context, index) {
+
               final messageData = snapshot.data![index];
               var timeSent = DateFormat.Hm().format(messageData.timeSent);
               if (messageData.senderId ==
@@ -53,16 +55,16 @@ class _ChatListState extends ConsumerState<ChatList> {
                 return MyMessageCard(
                   message: messageData.text,
                   date: timeSent,
+                  type: messageData.type,
                 );
               }
               return SenderMessageCard(
                 message: messageData.text,
                 date: timeSent,
+                type: messageData.type,
               );
             },
           );
         });
   }
 }
-
-

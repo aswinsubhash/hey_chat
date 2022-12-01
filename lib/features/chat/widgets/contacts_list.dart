@@ -4,7 +4,6 @@ import 'package:hey_chat/common/widgets/loader.dart';
 import 'package:hey_chat/features/chat/controller/chat_controller.dart';
 import 'package:hey_chat/models/chat_contact.dart';
 import 'package:hey_chat/utils/colors.dart';
-import 'package:hey_chat/utils/info.dart';
 import 'package:hey_chat/features/chat/view/mobile_chat_screen.dart';
 import 'package:intl/intl.dart';
 

@@ -10,6 +10,21 @@ void showSnackBar({required BuildContext context, required String content}) {
   );
 }
 
+//select image from camera
+Future<File?> pickImageFromCamera(BuildContext context) async {
+  File? cameraImage;
+  try {
+    final pickedImage =
+        await ImagePicker().pickImage(source: ImageSource.camera);
+    if (pickedImage != null) {
+      cameraImage = File(pickedImage.path);
+    }
+  } catch (e) {
+    showSnackBar(context: context, content: e.toString());
+  }
+  return cameraImage;
+}
+
 Future<File?> pickImageFromGallery(BuildContext context) async {
   File? image;
   try {
@@ -22,4 +37,19 @@ Future<File?> pickImageFromGallery(BuildContext context) async {
     showSnackBar(context: context, content: e.toString());
   }
   return image;
+}
+
+//select video from files
+Future<File?> pickVideoFromGallery(BuildContext context) async {
+  File? video;
+  try {
+    final pickedVideo =
+        await ImagePicker().pickVideo(source: ImageSource.gallery);
+    if (pickedVideo != null) {
+      video = File(pickedVideo.path);
+    }
+  } catch (e) {
+    showSnackBar(context: context, content: e.toString());
+  }
+  return video;
 }

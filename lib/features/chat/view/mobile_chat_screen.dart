@@ -1,4 +1,3 @@
-// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:hey_chat/common/widgets/loader.dart';
@@ -49,9 +48,6 @@ class MobileChatScreen extends ConsumerWidget {
                 ],
               );
             }),
-
-            //5:13:15 timestamp
-            
         centerTitle: false,
         actions: [
           IconButton(
@@ -70,7 +66,7 @@ class MobileChatScreen extends ConsumerWidget {
       ),
       body: Column(
         children: [
-           Expanded(
+          Expanded(
             child: ChatList(
               receiverUserId: uid,
             ),
@@ -83,5 +79,3 @@ class MobileChatScreen extends ConsumerWidget {
     );
   }
 }
-
-
