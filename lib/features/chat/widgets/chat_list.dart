@@ -2,6 +2,8 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:hey_chat/common/enums/message_enum.dart';
+import 'package:hey_chat/common/providers/message_reply_provider.dart';
 import 'package:hey_chat/common/widgets/loader.dart';
 import 'package:hey_chat/features/chat/controller/chat_controller.dart';
 import 'package:hey_chat/features/chat/widgets/my_message_card.dart';
@@ -29,6 +31,20 @@ class _ChatListState extends ConsumerState<ChatList> {
     messageController.dispose();
   }
 
+  void onMessageSwipe(
+    String message,
+    bool isMe,
+    MessageEnum messageEnum,
+  ) {
+    ref.read(messageReplyProvider.notifier).update(
+          (state) => MessageReply(
+            message,
+            isMe,
+            messageEnum,
+          ),
+        );
+  }
+
   @override
   Widget build(BuildContext context) {
     return StreamBuilder<List<Message>>(
@@ -47,7 +63,6 @@ class _ChatListState extends ConsumerState<ChatList> {
             controller: messageController,
             itemCount: snapshot.data!.length,
             itemBuilder: (context, index) {
-
               final messageData = snapshot.data![index];
               var timeSent = DateFormat.Hm().format(messageData.timeSent);
               if (messageData.senderId ==
@@ -56,12 +71,28 @@ class _ChatListState extends ConsumerState<ChatList> {
                   message: messageData.text,
                   date: timeSent,
                   type: messageData.type,
+                  repliedText: messageData.repliedMessage,
+                  username: messageData.repliedTo,
+                  repliedMessageType: messageData.repliedMessageType,
+                  onLeftSwipe: () => onMessageSwipe(
+                    messageData.text,
+                    true,
+                    messageData.type,
+                  ),
                 );
               }
               return SenderMessageCard(
                 message: messageData.text,
                 date: timeSent,
                 type: messageData.type,
+                username: messageData.repliedTo,
+                repliedMessageType: messageData.repliedMessageType,
+                repliedText: messageData.repliedMessage,
+                onRightSwipe: () => onMessageSwipe(
+                  messageData.text,
+                  false,
+                  messageData.type,
+                ),
               );
             },
           );
