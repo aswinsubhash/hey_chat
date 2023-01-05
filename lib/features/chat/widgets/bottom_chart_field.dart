@@ -168,6 +168,7 @@ class _BottomChatFieldState extends ConsumerState<BottomChatField> {
                       isShowSendButton = true;
                     });
                   } else {
+                    
                     setState(() {
                       isShowSendButton = false;
                     });

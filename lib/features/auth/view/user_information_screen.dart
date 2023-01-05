@@ -38,6 +38,8 @@ class _UserInformationScreenState extends ConsumerState<UserInformationScreen> {
             name,
             image,
           );
+    }else{
+      showSnackBar(context: context, content: 'Fill out all the fields');
     }
   }
 
