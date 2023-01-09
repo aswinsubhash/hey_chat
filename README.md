@@ -40,23 +40,11 @@ User can do  the following:
 - Video and audio call (on the process)
 - Group chats, audio and video calls (on the process)
 
-## Screenshots
+## Screenshots 
 
-- Home screen of this application
-
-![screenshot](Home.png)
-
-- Chat screen of this application
-
-![screenshot](chats.png)
-
-- Media chats of this application
-
-![screenshot](Mediachat.png)
-
-- Emoji option of this application
-
-![screenshot](emoji.png)
+Home Screen                    |   Chat Screen             |  Media Chat   |  Emojis
+:-------------------------:|:-------------------------:|:-------------------------:|:-------------------------:
+![](Home.png)|![](chats.png)|![](Mediachat.png)|![](emoji.png)
 
 
 ## Packages and Credits
