@@ -7,7 +7,7 @@ Heychat is a real-time chat application using flutter as framework  and firebase
 
 - [Installation](#installation)
 - [Usage](#usage)
-- [Screeshots](#screenshots)
+- [Screenshots](#screenshots)
 - [Packages and Credits](#packages-and-credits)
 - [License](#license)
 
