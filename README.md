@@ -26,6 +26,7 @@ To install the project, follow these steps:
 4. Run the command 'flutter pub get' using the terminal
 5. Run the project by clicking the "run" button in the top menu or by using the terminal
    command 'flutter run'
+6. You need to change the firebase application file other wise it will not work
 
 
 ## Usage 
